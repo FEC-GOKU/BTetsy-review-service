@@ -1,41 +1,58 @@
 import React from 'react';
-import styles from '../styles.js';
 import StarRatingComponent from 'react-star-rating-component';
-import { Card, UsernameContainer, Avatar, AvatarContainer, UserNameDateDiv, UserNameATag, ReviewDate, ReviewStars, ReviewComment, PhotoInComment, ItemContainer, ItemPhoto, ItemLink } from './styled.js';
+import styles from '../styles.js';
+import {
+  Card, UsernameContainer, Avatar, AvatarContainer, UserNameDateDiv, UserNameATag, ReviewDate, ReviewStars, ReviewComment, PhotoInComment, ItemContainer, ItemPhoto, ItemLink,
+} from './styled.js';
 
-const ReviewItem = (props) => (
+const ReviewItem = ({
+  avatar, username, rating, photoInComment, date, comment, itemPhoto, item, handleModalView,
+}) => (
   <Card>
-    <UsernameContainer >
-      <Avatar src={props.avatar} />
+    <UsernameContainer>
+      <Avatar src={avatar} />
       <AvatarContainer>
-        <UserNameDateDiv >
-          <UserNameATag href='#'>{props.username}</UserNameATag>
-          <ReviewDate >
-            {props.date}
+        <UserNameDateDiv>
+          <UserNameATag href="#">{username}</UserNameATag>
+          <ReviewDate>
+            {date}
           </ReviewDate>
         </UserNameDateDiv>
-        <ReviewStars >
-          <StarRatingComponent editing={false} value={props.rating} starCount={5} starColor={'black'} emptyStarColor={'#E1E3DF'} />
+        <ReviewStars>
+          <StarRatingComponent editing={false} value={rating} starCount={5} starColor="black" emptyStarColor="#E1E3DF" />
         </ReviewStars>
 
         {
-          (props.photoInComment !== 'none'
-            ? <ReviewComment> {props.comment}
-              <br />
-              <PhotoInComment
-                onClick={() => props.handleModalView(props)}
-                src={props.photoInComment} />
-            </ReviewComment>
+            (photoInComment !== 'none'
+              ? (
+                <ReviewComment>
+                  {' '}
+                  {comment}
+                  <br />
+                  <PhotoInComment
+                    onClick={() => handleModalView({
+                      avatar, username, rating, photoInComment, date, comment, itemPhoto, item,
+                    })}
+                    src={photoInComment}
+                  />
+                </ReviewComment>
+              )
 
-            : <ReviewComment> {props.comment} </ReviewComment>)
-        }
+              : (
+                <ReviewComment>
+                  {' '}
+                  {comment}
+                  {' '}
+                </ReviewComment>
+              ))
+          }
 
       </AvatarContainer>
     </UsernameContainer>
 
-    <ItemContainer >
-      <ItemPhoto src={props.itemPhoto}></ItemPhoto>
-      <ItemLink >{props.item}</ItemLink>
+    <ItemContainer>
+      <ItemPhoto src={itemPhoto} />
+      <ItemLink>{item}</ItemLink>
     </ItemContainer>
 
 
@@ -44,9 +61,3 @@ const ReviewItem = (props) => (
 );
 
 export default ReviewItem;
-
-
-
-
-
-
