@@ -1,47 +1,54 @@
 import React from 'react';
-import styles from '../styles.js';
 import StarRatingComponent from 'react-star-rating-component';
-import { ModalOverlay, Modal, ModalWrapper, ModalImgContainer, ModalImg, ModalReviewContainer, UserModalContainer, Avatar, ModalUserName, ModalDate, ModalReviewStars, ModalCommentContainer, ModalComment, ModalItemContainer, ModalImageContainer, ModalItemImage, ModalItemLink, ModalExitButton } from './styled.js';
+import styles from '../styles.js';
+import {
+  ModalOverlay, Modal, ModalWrapper, ModalImgContainer, ModalImg, ModalReviewContainer, UserModalContainer, Avatar, ModalUserName, ModalDate, ModalReviewStars, ModalCommentContainer, ModalComment, ModalItemContainer, ModalImageContainer, ModalItemImage, ModalItemLink, ModalExitButton,
+} from './styled.js';
 
-const ModalView = (props) => (
-  <ModalOverlay id="modalOverlay" >
-    <Modal id="modalContainer" >
+const ModalView = ({
+  modalHTML, handleExitModalView,
+}) => (
+  <ModalOverlay id="modalOverlay">
+    <Modal id="modalContainer">
       <ModalWrapper>
         <ModalImgContainer>
-          <ModalImg src={props.modalHTML.photoInComment}></ModalImg>
+          <ModalImg src={modalHTML.photoInComment} />
         </ModalImgContainer>
         <ModalReviewContainer>
-          <UserModalContainer >
-            <Avatar src={props.modalHTML.avatar}></Avatar>
-            <ModalUserName href='#'>{props.modalHTML.username}</ModalUserName>
+          <UserModalContainer>
+            <Avatar src={modalHTML.avatar} />
+            <ModalUserName href="#">{modalHTML.username}</ModalUserName>
             <ModalDate>
-              {props.modalHTML.date}
+              {modalHTML.date}
             </ModalDate>
 
           </UserModalContainer>
 
           <ModalReviewStars>
-            <StarRatingComponent editing={false} value={props.modalHTML.rating} starCount={5} starColor='black' emptyStarColor='#E1E3DF' />
+            <StarRatingComponent editing={false} value={modalHTML.rating} starCount={5} starColor="black" emptyStarColor="#E1E3DF" />
           </ModalReviewStars>
           <ModalCommentContainer>
-            <ModalComment> {props.modalHTML.comment}</ModalComment>
+            <ModalComment>
+              {' '}
+              {modalHTML.comment}
+            </ModalComment>
           </ModalCommentContainer>
 
           <ModalItemContainer>
             <ModalImageContainer>
-              <ModalItemImage src={props.modalHTML.itemPhoto}></ModalItemImage>
+              <ModalItemImage src={modalHTML.itemPhoto} />
             </ModalImageContainer>
-            <ModalItemLink >{props.modalHTML.item}</ModalItemLink>
+            <ModalItemLink>{modalHTML.item}</ModalItemLink>
           </ModalItemContainer>
 
-          <ModalExitButton onClick={props.handleExitModalView}>X</ModalExitButton>
+          <ModalExitButton onClick={handleExitModalView}>X</ModalExitButton>
 
 
         </ModalReviewContainer>
       </ModalWrapper>
 
     </Modal>
-  </ModalOverlay >
+  </ModalOverlay>
 );
 
 

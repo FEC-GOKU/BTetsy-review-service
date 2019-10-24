@@ -1,4 +1,6 @@
+// eslint-disable-next-line
 import styled from 'styled-components';
+// eslint-disable-next-line
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
