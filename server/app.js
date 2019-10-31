@@ -56,13 +56,13 @@ app.put('/api/seller/:ID', (req, res) => {
       res.status(404).json({
         'option': 'update',
         'result': err
-      })
+      });
     }
 
     res.status(201).json({
       'option': 'update',
       'result': results
-    })
+    });
   });
 })
 
