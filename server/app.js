@@ -24,6 +24,64 @@ app.get('/api/seller/:sellerID', (req, res) => {
   });
 
 });
+/*
+  sellerID: { type: Number, unique: true },
+  seller: String,
+  reviews: Number,
+  ratings: Number,
+  comments: Array,
+*/
+app.post('/api/seller/', (req, res) => {
+  db.insertSellerData(req.body.id, req.body.seller, req.body.reviews, req.body.ratings, [], (err, results) => {
+    if (err) {
+      console.log('error occured add seller info', err);
+      res.status(404).json({
+        'option': 'error',
+        'result': err
+      });
+    }else{
+      res.status(201).json({
+        'option': 'post',
+        'result': results
+      });
+    }
+  });
+})
+
+app.put('/api/seller/:ID', (req, res) => {
+  //seller, reviews, ratings, callback
+  db.updateSellerData(req.params.ID, req.body.reviews, req.body.ratings, (err, results) => {
+    if (err) {
+      console.log('error occured update seller info', err);
+      res.status(404).json({
+        'option': 'update',
+        'result': err
+      })
+    }
+
+    res.status(201).json({
+      'option': 'update',
+      'result': results
+    })
+  });
+})
+
+app.delete('/api/seller/:ID', (req, res) => {
+  db.deleteSellerData(req.params.ID, (err, results) => {
+    if (err) {
+      console.log('error occured delete seller info', err);
+      res.status(404).json({
+        'option': 'delete',
+        'result': err
+      })
+    }
+
+    res.status(201).json({
+      'option': 'delete',
+      'result': results
+    })
+  });
+})
 
 
 app.listen(PORT, () => {
